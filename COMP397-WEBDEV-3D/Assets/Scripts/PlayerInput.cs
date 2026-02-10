@@ -63,4 +63,15 @@ public class PlayerInput : MonoBehaviour
         camXRotation = Mathf.Clamp(camXRotation, -90f, 90f);
         cam.gameObject.transform.localRotation = Quaternion.Euler(camXRotation * readLook.y, 0, 0);
     }
+
+
+    public void ChangeMouseSensibility(float value)
+    {
+        Debug.Log($"Playerinput Value changed - {value}");
+
+        mouseSensY = value;
+        rotationSpeed = value;
+    }
+
+
 }
