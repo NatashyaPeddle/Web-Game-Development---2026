@@ -1,4 +1,5 @@
 using KBCore.Refs;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,8 +17,10 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float mouseSensY = 5.0f;
     private float camXRotation;
     [SerializeField, Child] private Camera cam;
-    
-    
+    private InputAction jump;
+
+    [SerializeField, Scene] private AudioController audioController;
+
 
     private Vector3 velocity;
 
@@ -33,11 +36,25 @@ public class PlayerInput : MonoBehaviour
     {
         move = InputSystem.actions.FindAction("Player/Move");
         look = InputSystem.actions.FindAction("Player/Look");
+        jump = InputSystem.actions.FindAction("Player/Jump");
+        jump.started += Jump;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-   
     }
+
+
+    private void OnDisable()
+    {
+        jump.started -= Jump;
+    }
+
+    private void Jump (InputAction.CallbackContext context)
+    {
+        audioController.PlayJumpSFX();
+    }
+
 
     // Update is called once per frame
     void Update()
