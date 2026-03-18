@@ -75,10 +75,10 @@ public class PlayerInput : MonoBehaviour
         ///rotation of player
         transform.Rotate(Vector3.up, readLook.x * rotationSpeed * Time.deltaTime);
 
-        //rotate camera
+        ///ROTATE CAMERA
         camXRotation += mouseSensY * readLook.y * Time.deltaTime * -1;
         camXRotation = Mathf.Clamp(camXRotation, -90f, 90f);
-        cam.gameObject.transform.localRotation = Quaternion.Euler(camXRotation * readLook.y, 0, 0);
+        cam.gameObject.transform.localRotation = Quaternion.Euler(camXRotation, 0, 0);
     }
 
 
