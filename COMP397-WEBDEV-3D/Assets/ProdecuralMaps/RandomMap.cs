@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
 
 public class RandomMap : MonoBehaviour
 {

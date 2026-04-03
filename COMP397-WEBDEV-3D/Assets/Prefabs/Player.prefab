@@ -259,6 +259,7 @@ MonoBehaviour:
   mouseSensY: 5
   cam: {fileID: 6517341096030490562}
   audioController: {fileID: 0}
+  mobileScale: 10
 --- !u!114 &4392322539017108695
 MonoBehaviour:
   m_ObjectHideFlags: 0

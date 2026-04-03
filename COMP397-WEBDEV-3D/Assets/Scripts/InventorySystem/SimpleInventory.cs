@@ -1,5 +1,5 @@
 using JetBrains.Annotations;
-using static UnityEditor.Progress;
+
 
 public class SimpleInventory : PersistentSingleton<SimpleInventory>
 {

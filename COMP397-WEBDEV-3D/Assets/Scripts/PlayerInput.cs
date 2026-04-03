@@ -21,6 +21,8 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField, Scene] private AudioController audioController;
 
+    [SerializeField] private float mobileScale = 10;
+
 
     private Vector3 velocity;
 
@@ -39,8 +41,10 @@ public class PlayerInput : MonoBehaviour
         jump = InputSystem.actions.FindAction("Player/Jump");
         jump.started += Jump;
 
+        #if !UNITY_ANDROID
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        #endif
 
     }
 
@@ -72,12 +76,27 @@ public class PlayerInput : MonoBehaviour
         movement += velocity;
         controller.Move(movement);
 
+
+
+
+#if UNITY_ANDROID
+        ///ROTATE CAMERA
+        camXRotation += mouseSensY * readLook.y * Time.deltaTime * -1 * rotationSpeed * mobileScale;
+
+        ///rotation of player
+        transform.Rotate(Vector3.up, readLook.x * rotationSpeed * mobileScale * Time.deltaTime);
+
+#else
+        ///ROTATE CAMERA
+        camXRotation += mouseSensY * readLook.y * Time.deltaTime * -1;
+
         ///rotation of player
         transform.Rotate(Vector3.up, readLook.x * rotationSpeed * Time.deltaTime);
 
-        ///ROTATE CAMERA
+#endif
+
         camXRotation += mouseSensY * readLook.y * Time.deltaTime * -1;
-        camXRotation = Mathf.Clamp(camXRotation, -90f, 90f);
+        camXRotation = Mathf.Clamp(camXRotation, -80f, 50f);
         cam.gameObject.transform.localRotation = Quaternion.Euler(camXRotation, 0, 0);
     }
 
